@@ -1,0 +1,21 @@
+{
+  "name": "talent-grid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd backend && pnpm install && cd ../frontend && pnpm install && pnpm run build",
+    "start" : "cd backend && pnpm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amirrajj-dev/Talent-Grid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amirrajj-dev/Talent-Grid/issues"
+  },
+  "homepage": "https://github.com/amirrajj-dev/Talent-Grid#readme"
+}
