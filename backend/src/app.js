@@ -41,9 +41,9 @@ if (ENV.NODE_ENV === 'production') {
 
 const startServer = async () => {
   try {
+    await mongoose.connection.close().catch(() => {});
+    await connectToDb();
     app.listen(port, async () => {
-      await mongoose.connection.close().catch(() => {});
-      await connectToDb();
       console.log(`app is running on port ${port} ✨`);
     });
   } catch (error) {
@@ -74,12 +74,12 @@ process.on('SIGTERM', async () => {
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
+  logger.error('Uncaught Exception:', { error: error.message, stack: error.stack });
   process.exit(1);
 });
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  logger.error('Unhandled Rejection', { reason, promise });
   process.exit(1);
 });
