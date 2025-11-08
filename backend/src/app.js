@@ -6,6 +6,9 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import logger from './lib/logger.js';
+import cors from 'cors';
+import { serve } from 'inngest/express';
+import { inngest, functions } from './lib/inngest.js';
 
 const app = express();
 
@@ -17,11 +20,26 @@ app.use(
   }),
 );
 
+app.use(
+  cors({
+    credentials: true,
+    origin: ENV.NODE_ENV === 'development' ? 'http://localhost:5173' : ENV.FRONTEND_URL,
+  }),
+);
+
 app.use(express.json());
 
 const port = ENV.PORT || 3000;
 
 const __dirname = path.resolve();
+
+app.use(
+  '/api/inngest',
+  serve({
+    client: inngest,
+    functions,
+  }),
+);
 
 app.get('/health', (req, res) => {
   logger.info('Health Check');
