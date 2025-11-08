@@ -4,6 +4,7 @@ export const ENV = {
   PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV,
   DB_URI: process.env.DB_URI,
+  FRONTEND_URL : process.env.FRONTEND_URL,
   LOG_LEVEL: process.env.LOG_LEVEL,
   INNGEST_EVENT_KEY: process.env.INNGEST_EVENT_KEY,
   INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY,
