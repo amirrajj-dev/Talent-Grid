@@ -16,12 +16,12 @@ export const getStreamToken = async (req, res) => {
       },
     });
   } catch (error) {
-    logger.info(
+    logger.error(
       `error in the getStreamToken function => ${error instanceof Error ? error.message : error}`,
     );
     return res.status(500).json({
       message: 'internal server error',
-      succss: false,
+      success: false,
     });
   }
 };

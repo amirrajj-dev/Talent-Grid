@@ -11,7 +11,7 @@ export const protectRoute = [
       const clerkId = req.auth().userId;
       if (!clerkId) {
         logger.error('unauthorized - invalid token (clerkId not found)');
-        return res.status(200).json({
+        return res.status(401).json({
           message: 'UNAUTHORIZED',
           success: false,
         });
@@ -29,10 +29,6 @@ export const protectRoute = [
       req.user = user;
       next();
     } catch (error) {
-      console.log(
-        'error in route protection middleware => ',
-        error instanceof Error ? error.message : error,
-      );
       logger.error(
         `error in route protection middleware => ${error instanceof Error ? error.message : error}`,
       );
