@@ -26,7 +26,7 @@ export const syncUser = inngest.createFunction(
     await upsertStreamUser({
       id: newUser.clerkId.toString(),
       name: newUser.name,
-      image: newUser.image,
+      image: newUser.profileImage,
     });
     await sendWelcomeEmail(newUser.email, newUser.name);
   },
