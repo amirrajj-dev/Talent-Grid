@@ -9,6 +9,8 @@ import logger from './lib/logger.js';
 import cors from 'cors';
 import { serve } from 'inngest/express';
 import { inngest, functions } from './lib/inngest.js';
+import { clerkMiddleware } from '@clerk/express';
+import chatRoutes from './routes/chat.routes.js';
 
 const app = express();
 
@@ -26,6 +28,7 @@ app.use(
     origin: ENV.NODE_ENV === 'development' ? 'http://localhost:5173' : ENV.FRONTEND_URL,
   }),
 );
+app.use(clerkMiddleware());
 
 app.use(express.json());
 
@@ -49,6 +52,8 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toTimeString(),
   });
 });
+
+app.use('/api.chat', chatRoutes);
 
 if (ENV.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
