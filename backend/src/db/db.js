@@ -5,7 +5,7 @@ import logger from '../lib/logger.js';
 export const connectToDb = async () => {
   try {
     if (mongoose.connections[0]?.readyState) {
-      logger.log('connected to db sucesfully ⚡️');
+      logger.info('connected to db sucesfully ⚡️');
       console.log('already connected to the DB ⚡️');
       return;
     }
